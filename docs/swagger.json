@@ -1,0 +1,148 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Service API",
+        "title": "Service API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:18888",
+    "basePath": "/api/v1",
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "description": "Login",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "parameters": [
+                    {
+                        "description": "request",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/basic-query/": {
+            "post": {
+                "description": "Basic Query",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Basic Query"
+                ],
+                "summary": "Basic Query",
+                "parameters": [
+                    {
+                        "description": "request",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.BasicQueryRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.BasicQueryRequest": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "modelType": {
+                    "type": "string"
+                },
+                "option": {
+                    "$ref": "#/definitions/model.OPTION_REQUEST"
+                }
+            }
+        },
+        "model.LoginRequest": {
+            "type": "object",
+            "properties": {
+                "passworld": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.OPTION_REQUEST": {
+            "type": "string",
+            "enum": [
+                "INSERT",
+                "UPDATE",
+                "DELETE"
+            ],
+            "x-enum-varnames": [
+                "INSERT",
+                "UPDATE",
+                "DELETE"
+            ]
+        },
+        "model.Page": {
+            "type": "object",
+            "properties": {
+                "pageIndex": {
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.Response": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "error": {
+                    "type": "string"
+                },
+                "page": {
+                    "$ref": "#/definitions/model.Page"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}

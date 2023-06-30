@@ -1,0 +1,98 @@
+basePath: /api/v1
+definitions:
+  model.BasicQueryRequest:
+    properties:
+      data: {}
+      modelType:
+        type: string
+      option:
+        $ref: '#/definitions/model.OPTION_REQUEST'
+    type: object
+  model.LoginRequest:
+    properties:
+      passworld:
+        type: string
+      username:
+        type: string
+    type: object
+  model.OPTION_REQUEST:
+    enum:
+    - INSERT
+    - UPDATE
+    - DELETE
+    type: string
+    x-enum-varnames:
+    - INSERT
+    - UPDATE
+    - DELETE
+  model.Page:
+    properties:
+      pageIndex:
+        type: integer
+      pageSize:
+        type: integer
+      total:
+        type: integer
+    type: object
+  model.Response:
+    properties:
+      data: {}
+      error:
+        type: string
+      page:
+        $ref: '#/definitions/model.Page'
+      success:
+        type: boolean
+    type: object
+host: localhost:18888
+info:
+  contact: {}
+  description: Service API
+  title: Service API
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login
+      parameters:
+      - description: request
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/model.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      summary: Login
+      tags:
+      - Auth
+  /basic-query/:
+    post:
+      consumes:
+      - application/json
+      description: Basic Query
+      parameters:
+      - description: request
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/model.BasicQueryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Response'
+      summary: Basic Query
+      tags:
+      - Basic Query
+swagger: "2.0"
